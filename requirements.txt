@@ -2,3 +2,4 @@ Django~=5.2.1
 environs~=14.1.1
 pyTelegramBotAPI~=4.27.0
 aiohttp~=3.11.18
+asgiref~=3.8.1
