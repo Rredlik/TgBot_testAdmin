@@ -1,14 +1,16 @@
+import telebot
 from telebot import types
 from telebot.async_telebot import AsyncTeleBot
 from django.conf import settings
 
 bot = AsyncTeleBot(settings.TOKEN_BOT, parse_mode='HTML')
 
+telebot.logger.setLevel(settings.LOG_LEVEL)
 
 @bot.message_handler(commands=['start'])
 async def start_message(message):
     markup = types.InlineKeyboardMarkup()
-    button1 = types.InlineKeyboardButton("Админка", url='http://localhost')
+    button1 = types.InlineKeyboardButton("Админка", url='http://google.com')
     markup.add(button1)
 
     await bot.reply_to(message, '<b>Привет</b>, ты зарегистрирован!\n'
