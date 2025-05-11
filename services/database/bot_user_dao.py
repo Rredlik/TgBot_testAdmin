@@ -66,6 +66,12 @@ def update_or_create_tg_user(data: types.Chat | types.User):
 
 
 @sync_to_async
+def get_telegram_user(django_user):
+    user = TelegramUser.objects.get(django_user=django_user)
+    return user
+
+
+@sync_to_async
 def get_all_telegram_users():
     users = TelegramUser.objects.all()
     return users

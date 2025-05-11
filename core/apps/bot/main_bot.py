@@ -42,13 +42,16 @@ async def start_message(message, data):
 
 
 async def send_login_notification(user):
-    users = await get_all_telegram_users()
-    for tg_user in users:
-        await send_single_notification(tg_user.user_id, user)
-    # await asyncio.gather(*[
-    #     send_single_notification(tg_user.user_id, user)
-    #     for tg_user in users
-    # ])
+    try:
+        users = await get_all_telegram_users()
+
+        # Параллельная отправка через gather
+        await asyncio.gather(*[
+            send_single_notification(tg_user.user_id, user)
+            for tg_user in users
+        ])
+    except Exception as e:
+        logger.error(f"Notification error: {str(e)}")
 
 async def send_single_notification(chat_id, user):
     try:
