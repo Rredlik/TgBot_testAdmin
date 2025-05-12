@@ -73,5 +73,8 @@ def get_telegram_user(django_user):
 
 @sync_to_async
 def get_all_telegram_users():
-    users = TelegramUser.objects.all()
-    return users
+    try:
+        return list(TelegramUser.objects.all())
+    except Exception as e:
+        logger.error(f"Database error: {str(e)}")
+        return []
